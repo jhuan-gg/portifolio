@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { 
-  Layout, 
-  Database, 
-  Briefcase, 
+import {
+  Layout,
+  Database,
+  Briefcase,
   Cloud
 } from 'lucide-react'
 
@@ -20,15 +20,14 @@ function App() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50)
     }
-    
-    // Refresh ScrollTrigger when the user navigates via anchor
+
     const handleNavigation = () => {
       setTimeout(() => ScrollTrigger.refresh(), 100)
     }
 
     window.addEventListener('scroll', handleScroll)
     window.addEventListener('hashchange', handleNavigation)
-    
+
     return () => {
       window.removeEventListener('scroll', handleScroll)
       window.removeEventListener('hashchange', handleNavigation)
@@ -38,19 +37,18 @@ function App() {
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const sections = gsap.utils.toArray('section')
-      
+
       sections.forEach((section) => {
         const title = section.querySelector('.section-title')
         const content = section.querySelector('.container > div:not(.section-title)')
 
-        // Animate Title
         if (title) {
-          gsap.fromTo(title, 
+          gsap.fromTo(title,
             { y: 30, opacity: 0 },
             {
               scrollTrigger: {
                 trigger: section,
-                start: "top 95%", // Trigger as soon as it enters viewport
+                start: "top 95%",
                 toggleActions: "play none none none"
               },
               y: 0,
@@ -61,7 +59,6 @@ function App() {
           )
         }
 
-        // Animate Content
         if (content) {
           gsap.fromTo(content,
             { y: 40, opacity: 0 },
@@ -81,7 +78,6 @@ function App() {
         }
       })
 
-      // Hero Entry
       gsap.fromTo(".hero-content > *",
         { y: 50, opacity: 0 },
         {
@@ -100,23 +96,23 @@ function App() {
   }, [])
 
   const skills = [
-    { 
-      category: "Frontend", 
+    {
+      category: "Frontend",
       icon: <Layout size={20} />,
       items: ["React", "Next.js", "HTML5/CSS3", "Styled-Components", "Material-UI", "GSAP", "SPA Performance"]
     },
-    { 
-      category: "Backend & DB", 
+    {
+      category: "Backend & DB",
       icon: <Database size={20} />,
       items: ["Node.js", "Supabase", "CouchDB", "Firebase", "State Management"]
     },
-    { 
-      category: "DevOps & Cloud", 
+    {
+      category: "DevOps & Cloud",
       icon: <Cloud size={20} />,
       items: ["Docker", "Docker Compose", "AWS", "VPS", "Deploy CI/CD", "Git/GitHub"]
     },
-    { 
-      category: "Business", 
+    {
+      category: "Business",
       icon: <Briefcase size={20} />,
       items: ["ERP Systems", "SaaS Architecture", "UI Componentization", "Agile Workflow"]
     }
@@ -189,13 +185,13 @@ function App() {
             <div className="about-grid glass">
               <div className="about-text">
                 <p>
-                  Desenvolvedor Full Stack especializado em <strong>React</strong> e ecossistema moderno, com forte experiência em 
-                  componentização de UI, estilização com Styled-Components e integração de 
-                  bibliotecas de design como Material-UI (MUI). 
+                  Desenvolvedor Full Stack especializado em <strong>React</strong> e ecossistema moderno, com forte experiência em
+                  componentização de UI, estilização com Styled-Components e integração de
+                  bibliotecas de design como Material-UI (MUI).
                 </p>
                 <p>
-                  Hábil na construção de interfaces responsivas, componentes reutilizáveis, 
-                  gerenciamento de estado e otimização de performance em aplicações SPA, 
+                  Hábil na construção de interfaces responsivas, componentes reutilizáveis,
+                  gerenciamento de estado e otimização de performance em aplicações SPA,
                   aplicando boas práticas de desenvolvimento moderno e design modular.
                 </p>
               </div>
