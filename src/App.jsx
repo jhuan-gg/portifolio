@@ -90,6 +90,17 @@ function App() {
         }
       )
 
+      gsap.fromTo(".hero-image",
+        { scale: 0.8, opacity: 0 },
+        {
+          scale: 1,
+          opacity: 1,
+          duration: 1.2,
+          ease: "power3.out",
+          delay: 0.8
+        }
+      )
+
     }, appRef)
 
     return () => ctx.revert()
@@ -163,14 +174,19 @@ function App() {
 
       <main>
         <section className="hero" id="home">
-          <div className="container hero-content">
-            <h4 className="hero-greeting">Olá, eu sou</h4>
-            <h1 className="hero-name">Jhuan <span className="gradient-text">Gabriel</span></h1>
-            <h2 className="hero-title">Desenvolvedor Full Stack</h2>
-            <p className="hero-tagline">"Vamos codar suas ideias?"</p>
-            <div className="hero-actions">
-              <a href="#projects" className="btn btn-primary">Ver Projetos</a>
-              <a href="#contact" className="btn btn-secondary">Entrar em Contato</a>
+          <div className="container hero-container">
+            <div className="hero-content">
+              <h4 className="hero-greeting">Olá, eu sou</h4>
+              <h1 className="hero-name">Jhuan <span className="gradient-text">Gabriel</span></h1>
+              <h2 className="hero-title">Desenvolvedor Full Stack</h2>
+              <p className="hero-tagline">"Vamos codar suas ideias?"</p>
+              <div className="hero-actions">
+                <a href="#projects" className="btn btn-primary">Ver Projetos</a>
+                <a href="#contact" className="btn btn-secondary">Entrar em Contato</a>
+              </div>
+            </div>
+            <div className="hero-image-wrapper">
+              <img src="/eu.png" alt="Jhuan Gabriel" className="hero-image" />
             </div>
           </div>
           <div className="hero-background">
