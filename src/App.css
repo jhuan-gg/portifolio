@@ -1,8 +1,12 @@
-html, body {
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+body {
   height: 100%;
   margin: 0;
   padding: 0;
-  scroll-behavior: smooth;
   overflow-x: hidden;
 }
 
@@ -12,14 +16,20 @@ section {
   align-items: center;
   justify-content: center;
   position: relative;
-  overflow: hidden;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 @media (max-width: 768px) {
+  html {
+    scroll-snap-type: none; /* Desativa no celular para evitar travamentos caso os cards estourem o tamanho da tela */
+  }
+
   section {
     height: auto;
     min-height: 100vh;
-    padding: 6rem 0;
+    padding: 5rem 0;
+    scroll-snap-align: none;
   }
 }
 
@@ -100,7 +110,6 @@ section {
   display: flex;
   align-items: center;
   position: relative;
-  overflow: hidden;
 }
 
 .hero-container {
@@ -131,6 +140,18 @@ section {
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .hero-actions .btn {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+  }
+  .hero-image {
+    max-width: 250px;
   }
 }
 
@@ -224,36 +245,25 @@ section {
   border-color: var(--text-primary);
 }
 
-/* Hero Background Blobs */
-.hero-background {
+/* Background Blobs */
+.bg-blobs {
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   z-index: 1;
+  pointer-events: none;
 }
 
 .blob {
   position: absolute;
   width: 400px;
   height: 400px;
-  background: var(--accent-primary);
   filter: blur(100px);
   opacity: 0.15;
   border-radius: 50%;
-  top: 20%;
-  right: -100px;
   animation: float 20s infinite alternate;
-}
-
-.blob.second {
-  background: var(--accent-secondary);
-  bottom: 10%;
-  left: -100px;
-  top: auto;
-  right: auto;
-  animation-delay: -10s;
 }
 
 @keyframes float {
@@ -273,6 +283,112 @@ section {
   margin-bottom: 1.5rem;
   font-size: 1.1rem;
   color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .about-grid {
+    padding: 1.5rem;
+  }
+  .about-text p {
+    font-size: 1rem;
+  }
+}
+
+/* Experience Section */
+.experience-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  .experience-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+.experience-card {
+  padding: 2.5rem;
+  border-radius: 16px;
+  transition: var(--transition-smooth);
+}
+
+@media (max-width: 768px) {
+  .experience-card {
+    padding: 1.5rem;
+  }
+}
+
+.experience-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.exp-header {
+  margin-bottom: 1.5rem;
+}
+
+.exp-header h3 {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.exp-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.exp-company {
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+.separator {
+  color: var(--border-color);
+}
+
+.exp-type {
+  padding: 0.2rem 0.6rem;
+  background: var(--bg-tertiary);
+  border-radius: 4px;
+  font-size: 0.8rem;
+  border: 1px solid var(--border-color);
+}
+
+.exp-details {
+  list-style-type: none;
+  padding: 0;
+}
+
+.exp-details li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.exp-details li::before {
+  content: "▹";
+  position: absolute;
+  left: 0;
+  color: var(--accent-primary);
+}
+
+.exp-link {
+  display: inline-block;
+  margin-top: 1rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  font-size: 0.9rem;
 }
 
 /* Projects Section */
@@ -333,7 +449,7 @@ section {
 /* Skills Section Redesign */
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   align-items: stretch;
 }
@@ -351,7 +467,7 @@ section {
 }
 
 .skill-category {
-  padding: 2.5rem 2rem;
+  padding: 1.5rem 1.5rem;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -362,7 +478,7 @@ section {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .category-icon {
@@ -412,6 +528,16 @@ section {
   padding: 4rem;
   border-radius: 24px;
   text-align: center;
+}
+
+@media (max-width: 768px) {
+  .contact-content {
+    padding: 2rem;
+  }
+  .contact-info {
+    gap: 2rem !important;
+    flex-direction: column;
+  }
 }
 
 .contact-info {
